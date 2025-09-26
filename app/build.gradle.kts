@@ -50,6 +50,9 @@ android {
 }
 
 dependencies {
+    //Coil
+    implementation(libs.coil.compose)
+
     //Koin
     implementation(libs.koin.androidx.navigation)
     implementation(libs.koin.androidx.compose)
