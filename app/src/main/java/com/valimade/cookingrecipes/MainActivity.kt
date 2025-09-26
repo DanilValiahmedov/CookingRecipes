@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.valimade.cookingrecipes.domain.model.Recipe
+import com.valimade.cookingrecipes.presentation.RecipeListScreen
 import com.valimade.cookingrecipes.presentation.components.RecipeCard
 import com.valimade.cookingrecipes.utils.ui.theme.CookingRecipesTheme
 
@@ -21,7 +22,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CookingRecipesTheme {
-
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    RecipeListScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }

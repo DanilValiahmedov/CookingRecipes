@@ -27,11 +27,10 @@ import com.valimade.cookingrecipes.presentation.model.RecipePreviewState
 @Composable
 fun RecipeCard(
     recipe: RecipePreviewState,
-    onClick: (() -> Unit)? = null,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit,
 ) {
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable { onClick?.invoke() },
@@ -47,8 +46,8 @@ fun RecipeCard(
                     .height(200.dp)
                     .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
                 contentScale = ContentScale.Crop,
-                placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
-                error = painterResource(id = R.drawable.ic_launcher_foreground)
+                placeholder = painterResource(id = R.drawable.placeholder),
+                error = painterResource(id = R.drawable.error)
             )
             
             Column(
