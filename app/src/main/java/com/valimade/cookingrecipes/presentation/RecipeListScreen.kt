@@ -2,6 +2,7 @@ package com.valimade.cookingrecipes.presentation
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.valimade.cookingrecipes.presentation.components.AppHeader
 import com.valimade.cookingrecipes.presentation.components.RecipeCard
 import org.koin.androidx.compose.koinViewModel
 
@@ -41,13 +43,18 @@ fun RecipeListScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        AppHeader()
+
         if (recipePreviewState.isLoading) {
-            CircularProgressIndicator(color = Color.Blue)
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator(color = Color.Blue)
+            }
         } else {
             LazyColumn(
                 modifier = modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(recipePreviewState.recipeList) { recipe ->
                     RecipeCard(

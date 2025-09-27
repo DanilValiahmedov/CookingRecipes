@@ -20,7 +20,7 @@ val httpClientModule = module {
                 })
             }
             defaultRequest {
-                url("https://api.spoonacular.com/")
+                url("https://api.spoonacular.com")
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
         }

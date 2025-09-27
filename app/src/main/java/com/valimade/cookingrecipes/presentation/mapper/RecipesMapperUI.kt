@@ -9,9 +9,30 @@ object RecipesMapperUI {
             title = recipe.title,
             image = recipe.image ?: "",
             servings = recipe.servings ?: 0,
-            cookingMinutes = recipe.cookingMinutes ?: 0,
+            readyInMinutes = recipe.readyInMinutes ?: 0,
             aggregateLikes = recipe.aggregateLikes ?: 0,
-            summary = recipe.summary ?: "",
+            annotation = createAnnotation(recipe),
         )
     }
+
+    private fun createAnnotation(recipe: Recipe): String {
+        val tags = listOfNotNull(
+            if (recipe.vegetarian == true) "#vegetarian" else null,
+            if (recipe.vegan == true) "#vegan" else null,
+            if (recipe.glutenFree == true) "#glutenFree" else null,
+            if (recipe.dairyFree == true) "#dairyFree" else null,
+        ).joinToString(" ")
+
+        val details = listOf(
+            "Healthy: ${if (recipe.veryHealthy == true) "YES" else "NO"}",
+            "Cheap: ${if (recipe.cheap == true) "YES" else "NO"}",
+            "Popular: ${if (recipe.veryPopular == true) "YES" else "NO"}"
+        ).joinToString("\n")
+
+        return buildString {
+            if (tags.isNotEmpty()) appendLine(tags)
+            append(details)
+        }
+    }
+
 }

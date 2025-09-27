@@ -2,6 +2,9 @@ package com.valimade.cookingrecipes.utils.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val MainPinkColor = Color(0xFFFC00D6)
+val MainBlueColor = Color(0xFF0099FF)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)

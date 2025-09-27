@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.valimade.cookingrecipes.R
 import com.valimade.cookingrecipes.presentation.model.RecipeUI
+import com.valimade.cookingrecipes.utils.ui.theme.MainBlueColor
+import com.valimade.cookingrecipes.utils.ui.theme.MainPinkColor
 
 @Composable
 fun RecipeCard(
@@ -32,8 +35,8 @@ fun RecipeCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable { onClick?.invoke() },
+            .padding(vertical = 8.dp)
+            .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -57,30 +60,35 @@ fun RecipeCard(
             ) {
                 Text(
                     text = recipe.title,
+                    color = MainPinkColor,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    maxLines = 2,
+                )
+
+                Text(
+                    text = recipe.annotation,
+                    color = MainBlueColor,
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     IconWithInformation(
                         iconUrl = R.drawable.ic_dish,
-                        text = "${recipe.servings ?: 0} Servings"
+                        text = "${recipe.servings} Servings"
                     )
                     
                     IconWithInformation(
                         iconUrl = R.drawable.ic_watch,
-                        text = "${recipe.cookingMinutes} Minutes"
+                        text = "${recipe.readyInMinutes} Minutes"
                     )
                     
                     IconWithInformation(
                         iconUrl =R.drawable.ic_like,
-                        text = "${recipe.aggregateLikes ?: 0} Likes"
+                        text = "${recipe.aggregateLikes} Likes"
                     )
                 }
             }
