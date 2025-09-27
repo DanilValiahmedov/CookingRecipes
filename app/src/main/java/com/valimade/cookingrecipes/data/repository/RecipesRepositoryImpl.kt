@@ -1,6 +1,6 @@
 package com.valimade.cookingrecipes.data.repository
 
-import com.valimade.cookingrecipes.data.mapper.RecipesMapper
+import com.valimade.cookingrecipes.data.mapper.RecipesMapperData
 import com.valimade.cookingrecipes.data.model.RecipeData
 import com.valimade.cookingrecipes.domain.model.Recipe
 import com.valimade.cookingrecipes.domain.repository.RecipesRepository
@@ -20,7 +20,7 @@ class RecipesRepositoryImpl(
                 parameter("apiKey", apiKey)
             }.body()
 
-            val recipes = response.map { RecipesMapper.recipeDataToDomain(it) }
+            val recipes = response.map { RecipesMapperData.recipeDataToDomain(it) }
             Result.success(recipes)
         } catch (e: Exception) {
             Result.failure(e)

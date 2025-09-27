@@ -19,7 +19,7 @@ import com.valimade.cookingrecipes.domain.model.Measures
 import com.valimade.cookingrecipes.domain.model.Recipe
 import com.valimade.cookingrecipes.domain.model.StepLength
 
-object RecipesMapper {
+object RecipesMapperData {
     fun recipeDataToDomain(recipe: RecipeData): Recipe {
         return Recipe(
             id = recipe.id,
