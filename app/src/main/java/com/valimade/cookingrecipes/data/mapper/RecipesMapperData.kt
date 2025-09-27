@@ -1,5 +1,8 @@
 package com.valimade.cookingrecipes.data.mapper
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.valimade.cookingrecipes.data.database.RecipeEntity
 import com.valimade.cookingrecipes.data.model.AnalyzedInstructionData
 import com.valimade.cookingrecipes.data.model.ExtendedIngredientData
 import com.valimade.cookingrecipes.data.model.InstructionEquipmentData
@@ -18,8 +21,12 @@ import com.valimade.cookingrecipes.domain.model.MeasureUnit
 import com.valimade.cookingrecipes.domain.model.Measures
 import com.valimade.cookingrecipes.domain.model.Recipe
 import com.valimade.cookingrecipes.domain.model.StepLength
+import java.lang.reflect.Type
 
 object RecipesMapperData {
+    
+    private val gson = Gson()
+    
     fun recipeDataToDomain(recipe: RecipeData): Recipe {
         return Recipe(
             id = recipe.id,
@@ -133,5 +140,67 @@ object RecipesMapperData {
             number = data.number,
             unit = data.unit
         )
+    }
+    
+    fun recipeEntityToDomain(entity: RecipeEntity): Recipe {
+        return Recipe(
+            id = entity.id,
+            title = entity.title,
+            image = entity.image,
+            imageType = entity.imageType,
+            readyInMinutes = entity.readyInMinutes,
+            servings = entity.servings,
+            sourceUrl = entity.sourceUrl,
+            vegetarian = entity.vegetarian,
+            vegan = entity.vegan,
+            glutenFree = entity.glutenFree,
+            dairyFree = entity.dairyFree,
+            veryHealthy = entity.veryHealthy,
+            cheap = entity.cheap,
+            veryPopular = entity.veryPopular,
+            sustainable = entity.sustainable,
+            lowFodmap = entity.lowFodmap,
+            weightWatcherSmartPoints = entity.weightWatcherSmartPoints,
+            gaps = entity.gaps,
+            preparationMinutes = entity.preparationMinutes,
+            cookingMinutes = entity.cookingMinutes,
+            aggregateLikes = entity.aggregateLikes,
+            healthScore = entity.healthScore,
+            creditsText = entity.creditsText,
+            license = entity.license,
+            sourceName = entity.sourceName,
+            pricePerServing = entity.pricePerServing,
+            extendedIngredients = entity.extendedIngredients?.let { 
+                parseJsonToList(it, object : TypeToken<List<ExtendedIngredient>>() {}.type)
+            },
+            summary = entity.summary,
+            cuisines = entity.cuisines?.let { 
+                parseJsonToList(it, object : TypeToken<List<String>>() {}.type)
+            },
+            dishTypes = entity.dishTypes?.let { 
+                parseJsonToList(it, object : TypeToken<List<String>>() {}.type)
+            },
+            diets = entity.diets?.let { 
+                parseJsonToList(it, object : TypeToken<List<String>>() {}.type)
+            },
+            occasions = entity.occasions?.let { 
+                parseJsonToList(it, object : TypeToken<List<String>>() {}.type)
+            },
+            instructions = entity.instructions,
+            analyzedInstructions = entity.analyzedInstructions?.let { 
+                parseJsonToList(it, object : TypeToken<List<AnalyzedInstruction>>() {}.type)
+            },
+            spoonacularScore = entity.spoonacularScore,
+            spoonacularSourceUrl = entity.spoonacularSourceUrl
+        )
+    }
+    
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> parseJsonToList(json: String, type: Type): List<T>? {
+        return try {
+            gson.fromJson(json, type) as? List<T>
+        } catch (e: Exception) {
+            null
+        }
     }
 }

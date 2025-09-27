@@ -13,6 +13,7 @@ val recipesModule = module {
     single<RecipesRepository> {
         RecipesRepositoryImpl(
             httpClient = get(),
+            recipeDao = get(),
             apiKey = ApiKeys.spoonacularApiKey,
         )
     }

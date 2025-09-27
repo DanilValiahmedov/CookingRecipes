@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization") version "2.0.21"
+    id("com.google.devtools.ksp") version "1.9.22-1.0.17"
 }
 
 val localProperties = Properties()
@@ -49,8 +50,19 @@ android {
         compose = true
     }
 }
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
 
 dependencies {
+    //Gson
+    implementation(libs.gson)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
+
     //Coil
     implementation(libs.coil.compose)
 
