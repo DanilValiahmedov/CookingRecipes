@@ -22,13 +22,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.valimade.cookingrecipes.R
-import com.valimade.cookingrecipes.presentation.model.RecipeUI
+import com.valimade.cookingrecipes.presentation.model.RecipePreviewUI
 import com.valimade.cookingrecipes.utils.ui.theme.MainBlueColor
 import com.valimade.cookingrecipes.utils.ui.theme.MainPinkColor
 
 @Composable
 fun RecipeCard(
-    recipe: RecipeUI,
+    recipe: RecipePreviewUI,
     onClick: () -> Unit,
 ) {
     Card(

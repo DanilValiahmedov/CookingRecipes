@@ -1,4 +1,4 @@
-package com.valimade.cookingrecipes.presentation
+package com.valimade.cookingrecipes.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,7 +24,7 @@ class RecipeListViewModel(
                         it.copy(
                             isLoading = false,
                             recipeList = recipeDomain.map {
-                                RecipesMapperUI.recipeDomainToUI(it)
+                                RecipesMapperUI.recipePreviewDomainToUI(it)
                             },
                             error = null,
                         )

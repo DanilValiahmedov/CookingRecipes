@@ -1,7 +1,7 @@
 package com.valimade.cookingrecipes.presentation.model
 
-data class RecipePreviewState(
+data class RecipeState(
     val isLoading: Boolean = true,
-    val recipeList: List<RecipePreviewUI> = emptyList(),
+    val recipe: RecipeUI = RecipeUI(),
     val error: String? = null,
 )
