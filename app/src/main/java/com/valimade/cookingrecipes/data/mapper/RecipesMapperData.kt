@@ -203,4 +203,60 @@ object RecipesMapperData {
             null
         }
     }
+
+    fun recipeDataToEntity(recipeData: RecipeData): RecipeEntity {
+        val gson = Gson()
+
+        return RecipeEntity(
+            id = recipeData.id,
+            title = recipeData.title,
+            image = recipeData.image,
+            imageType = recipeData.imageType,
+            readyInMinutes = recipeData.readyInMinutes,
+            servings = recipeData.servings,
+            sourceUrl = recipeData.sourceUrl,
+            vegetarian = recipeData.vegetarian,
+            vegan = recipeData.vegan,
+            glutenFree = recipeData.glutenFree,
+            dairyFree = recipeData.dairyFree,
+            veryHealthy = recipeData.veryHealthy,
+            cheap = recipeData.cheap,
+            veryPopular = recipeData.veryPopular,
+            sustainable = recipeData.sustainable,
+            lowFodmap = recipeData.lowFodmap,
+            weightWatcherSmartPoints = recipeData.weightWatcherSmartPoints,
+            gaps = recipeData.gaps,
+            preparationMinutes = recipeData.preparationMinutes,
+            cookingMinutes = recipeData.cookingMinutes,
+            aggregateLikes = recipeData.aggregateLikes,
+            healthScore = recipeData.healthScore,
+            creditsText = recipeData.creditsText,
+            license = recipeData.license,
+            sourceName = recipeData.sourceName,
+            pricePerServing = recipeData.pricePerServing,
+            extendedIngredients = recipeData.extendedIngredients?.let {
+                gson.toJson(it)
+            },
+            summary = recipeData.summary,
+            cuisines = recipeData.cuisines?.let {
+                gson.toJson(it)
+            },
+            dishTypes = recipeData.dishTypes?.let {
+                gson.toJson(it)
+            },
+            diets = recipeData.diets?.let {
+                gson.toJson(it)
+            },
+            occasions = recipeData.occasions?.let {
+                gson.toJson(it)
+            },
+            instructions = recipeData.instructions,
+            analyzedInstructions = recipeData.analyzedInstructions?.let {
+                gson.toJson(it)
+            },
+            spoonacularScore = recipeData.spoonacularScore,
+            spoonacularSourceUrl = recipeData.spoonacularSourceUrl
+        )
+
+    }
 }

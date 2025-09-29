@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import com.valimade.cookingrecipes.presentation.viewmodel.RecipeListViewModel
 import com.valimade.cookingrecipes.presentation.components.AppHeader
 import com.valimade.cookingrecipes.presentation.components.RecipeCard
+import com.valimade.cookingrecipes.utils.ui.theme.MainBlueColor
+import com.valimade.cookingrecipes.utils.ui.theme.MainPinkColor
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -37,7 +42,7 @@ fun RecipeListScreen(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -51,9 +56,20 @@ fun RecipeListScreen(
             ) {
                 CircularProgressIndicator(color = Color.Blue)
             }
+        } else if (recipePreviewState.error != null) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Button(
+                    colors = ButtonDefaults.buttonColors(MainPinkColor),
+                    onClick = { viewModel.getRecipesList() },
+                    content = { Text(text = "Try again", color = MainBlueColor) },
+                )
+            }
         } else {
             LazyColumn(
-                modifier = modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
             ) {
                 items(recipePreviewState.recipeList) { recipe ->
                     RecipeCard(

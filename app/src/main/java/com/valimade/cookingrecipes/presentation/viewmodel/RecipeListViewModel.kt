@@ -17,6 +17,10 @@ class RecipeListViewModel(
     val recipePreviewState = _recipePreviewState.asStateFlow()
 
     init {
+        getRecipesList()
+    }
+
+    fun getRecipesList() {
         viewModelScope.launch {
             getRandomRecipesUseCase()
                 .onSuccess { recipeDomain ->

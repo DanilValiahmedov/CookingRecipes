@@ -4,4 +4,5 @@ import com.valimade.cookingrecipes.domain.model.Recipe
 
 interface RecipesRepository {
     suspend fun getRandomRecipes(number: Int = 100) : Result<List<Recipe>>
+    suspend fun getRecipeById(id: Int): Result<Recipe>
 }

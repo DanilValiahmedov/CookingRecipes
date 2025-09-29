@@ -3,6 +3,7 @@ package com.valimade.cookingrecipes.di
 import com.valimade.cookingrecipes.data.repository.RecipesRepositoryImpl
 import com.valimade.cookingrecipes.domain.repository.RecipesRepository
 import com.valimade.cookingrecipes.domain.usecase.GetRandomRecipesUseCase
+import com.valimade.cookingrecipes.domain.usecase.GetRecipeByIdUseCase
 import com.valimade.cookingrecipes.presentation.viewmodel.RecipeListViewModel
 import com.valimade.cookingrecipes.presentation.viewmodel.RecipeViewModel
 import com.valimade.cookingrecipes.utils.ApiKeys
@@ -14,12 +15,14 @@ val recipesModule = module {
     single<RecipesRepository> {
         RecipesRepositoryImpl(
             httpClient = get(),
-            recipeDao = get(),
             apiKey = ApiKeys.spoonacularApiKey,
+            dao = get(),
+            mapper = get(),
         )
     }
 
     singleOf(::GetRandomRecipesUseCase)
+    singleOf(::GetRecipeByIdUseCase)
 
     viewModel{
         RecipeListViewModel(
@@ -28,6 +31,8 @@ val recipesModule = module {
     }
 
     viewModel{
-        RecipeViewModel()
+        RecipeViewModel(
+            getRecipeByIdUseCase = get()
+        )
     }
 }
